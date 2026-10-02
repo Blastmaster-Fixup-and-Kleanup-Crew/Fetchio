@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetchio - Search Engine & Spiderbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="app.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-100 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Fetchio</h1>
+            <p class="text-xl text-gray-300">Advanced Web Crawler & Search Engine</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Crawl Section -->
+            <div class="bg-slate-800 rounded-lg border border-slate-700 p-8 shadow-xl">
+                <h2 class="text-2xl font-bold mb-6 text-blue-300">Start a Crawl</h2>
+                <form id="crawlForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Start URLs (comma-separated)</label>
+                        <input type="text" id="startUrls" placeholder="https://example.com" 
+                               class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-gray-100 focus:outline-none focus:border-blue-400" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Allowed Domains (comma-separated)</label>
+                        <input type="text" id="allowedDomains" placeholder="example.com" 
+                               class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-gray-100 focus:outline-none focus:border-blue-400" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Max Pages</label>
+                        <input type="number" id="maxPages" value="50" min="1" max="1000"
+                               class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-gray-100 focus:outline-none focus:border-blue-400">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
+                        Start Crawl
+                    </button>
+                </form>
+
+                <!-- Active Jobs -->
+                <div id="jobsList" class="mt-8 space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Search Section -->
+            <div class="bg-slate-800 rounded-lg border border-slate-700 p-8 shadow-xl">
+                <h2 class="text-2xl font-bold mb-6 text-cyan-300">Search</h2>
+                <form id="searchForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Search Query</label>
+                        <input type="text" id="query" placeholder="Search crawled pages..." 
+                               class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-gray-100 focus:outline-none focus:border-cyan-400">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Results Limit</label>
+                        <input type="number" id="limit" value="10" min="1" max="100"
+                               class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded text-gray-100 focus:outline-none focus:border-cyan-400">
+                    </div>
+                    <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded transition">
+                        Search
+                    </button>
+                </form>
+
+                <!-- Search Results -->
+                <div id="results" class="mt-8 space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

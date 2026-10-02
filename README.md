@@ -1,55 +1,144 @@
 # Fetchio
 
-Fetchio is a Python-based search engine and spiderbot project designed to crawl websites, extract document content, and provide a lightweight search index for discovered pages.
+Fetchio is a production-ready Python-based search engine and spiderbot with a modern FastAPI backend and Tailwind CSS frontend.
 
 ## Features
 
-- Async website crawling with `aiohttp`
-- HTML content extraction using BeautifulSoup
-- Link discovery and page normalization
-- Simple inverted-index search engine
-- CLI for crawl and search workflows
+✨ **Advanced Web Crawling**
+- Async/concurrent crawling with configurable worker pools
+- Automatic URL deduplication and normalization
+- robots.txt compliance checking
+- Politeness delays between requests
+- Domain filtering and link extraction
 
-## Project layout
+🔍 **Intelligent Search**
+- TF-IDF ranking algorithm
+- Full-text indexing of crawled pages
+- Real-time search results
+- Configurable result limits
 
-```text
-fetchio/
-  __init__.py
-  __main__.py
-  cli.py
-  config.py
-  crawler.py
-  indexer.py
-  models.py
-  search.py
-requirements.txt
-pyproject.toml
-README.md
-.gitignore
-```
+⚡ **FastAPI Backend**
+- RESTful API for crawl and search operations
+- Async request handling
+- Real-time crawl job status tracking
+- Health checks and monitoring
 
-## Quick start
+🎨 **Tailwind CSS Frontend**
+- Modern, responsive UI
+- Real-time job status updates
+- Integrated search interface
+- Dark theme with gradient accents
+
+## Quick Start
+
+### Installation
 
 ```bash
+git clone https://github.com/Blastmaster-Fixup-and-Kleanup-Crew/Fetchio.git
+cd Fetchio
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 pip install -r requirements.txt
-python -m fetchio.cli crawl --start-url https://example.com --max-pages 25
-python -m fetchio.cli search "example"
 ```
 
-## Configuration
+### Configuration
 
-The crawler behavior is configured through `FetchioConfig` in `fetchio/config.py`.
-You can customize the default start URLs, allowed domains, maximum pages, and request headers.
+```bash
+cp .env.example .env
+# Edit .env with your settings
+```
 
-## Development notes
+### Running the Application
 
-This repository is intentionally scaffolded as a clean starting point for a more complete spiderbot/search engine. It includes:
+```bash
+python -m fetchio
+```
 
-- crawler infrastructure
-- indexing logic
-- search ranking
-- a CLI entrypoint
+Then open http://localhost:8000 in your browser.
 
-The next stages can include robots.txt handling, queue persistence, distributed crawling, and a real web UI.
+## API Endpoints
+
+### Crawl Operations
+
+**Start a Crawl**
+```bash
+POST /api/crawl
+Content-Type: application/json
+
+{
+  "start_urls": ["https://example.com"],
+  "allowed_domains": ["example.com"],
+  "max_pages": 50
+}
+```
+
+**Get Crawl Status**
+```bash
+GET /api/crawl/{job_id}
+```
+
+**List All Crawls**
+```bash
+GET /api/crawls
+```
+
+### Search Operations
+
+**Search Crawled Pages**
+```bash
+POST /api/search
+Content-Type: application/json
+
+{
+  "query": "search term",
+  "limit": 10
+}
+```
+
+## Project Structure
+
+```
+fetchio/
+  api.py           # FastAPI application
+  crawler.py       # Crawling engine & queue management
+  indexer.py       # Search indexing & ranking
+  models.py        # Data models
+  queue.py         # URL queue with deduplication
+  robots.py        # robots.txt handling
+  database.py      # SQLAlchemy ORM models
+  config.py        # Configuration management
+  __main__.py      # Entry point
+
+static/
+  index.html       # Frontend UI
+  app.js          # Frontend logic
+
+requirements.txt   # Python dependencies
+pyproject.toml     # Project metadata
+```
+
+## Development
+
+Run tests:
+```bash
+pytest tests/
+```
+
+Run with hot reload:
+```bash
+python -m fetchio
+```
+
+## Future Enhancements
+
+- [ ] Persistent job storage (SQLite/PostgreSQL)
+- [ ] Distributed crawling with Celery
+- [ ] Web UI for crawl visualization
+- [ ] Advanced filtering and faceted search
+- [ ] Crawl scheduling and automation
+- [ ] Export results (JSON, CSV)
+- [ ] Admin dashboard
+
+## License
+
+MIT
