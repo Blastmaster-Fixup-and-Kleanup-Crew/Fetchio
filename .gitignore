@@ -1,35 +1,23 @@
-# Byte-compiled / optimized files
+# Python
 __pycache__/
 *.py[cod]
 *.so
-
-# Virtual environments
+*.egg-info/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
 .venv/
 venv/
 ENV/
 
-# Packaging
-build/
-dist/
-*.egg-info/
-.eggs/
+# Project data
+data/
+*.db
+.env
 
-# Test artifacts
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Editor config
+# Editor / OS
 .vscode/
 .idea/
-*.swp
-*.swo
-
-# OS files
 .DS_Store
 Thumbs.db
-
-# Project runtime data
-.data/
-data/
-*.json
